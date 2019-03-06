@@ -10,6 +10,17 @@ var dbcon = require("./sql_con_man");
 let fs = require("fs-extra");
 var app = express();
 
+
+async function term_run(cmd,args) {
+  if(!await fs.pathExists("db.ready")){
+    var spawn = require('child_process').spawn;
+    var child = spawn(cmd, args);
+    var resp = "";
+    console.log("db.done");
+    fs.writeFileSync("db.ready","yes");
+  }
+}
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -41,7 +52,11 @@ app.use(function(err, req, res, next) {
 
 let db = new dbcon("app.db");
 let data = fs.readFileSync("startup");
-db.multiquery(data.toString()).then((read)=>{console.log("done db")}).catch((e)=>{console.error(e)});
+db.multiquery(data.toString())
+    .then((read)=>{
+      term_run('sh',["post.exec.sh"])
+    })
+    .catch((e)=>{console.error(e)});
 //db init
 
 module.exports = app;

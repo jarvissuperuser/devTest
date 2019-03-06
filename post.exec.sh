@@ -1,0 +1,1 @@
+cat postConfigDB | sqlite3 app.db

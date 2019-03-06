@@ -11,7 +11,16 @@ let psHash = (arr= []) =>{
 };
 let login = async (user ={})=>{
     user = db.mute(user,[],['submit']);
-    let res = await db.transaction(db.slct('id',"users",db.ex_key(user,[]),db.ex_val(user,[])));
+    user = psHash(user);
+    let strVal = db.val_to_str(user);
+    strVal = strVal.split(",");
+    strVal = strVal.join(" and ");
+    let query = db.slct('*',"users",` ${strVal} `);
+    //console.log(query);
+    let res = await db.transaction(query).catch(e=>{console.error(e.line)});
+    return(res);
+};
+let create_session =(user)=>{
 
 };
 
@@ -25,7 +34,7 @@ let auth = async (user,operation)=>{
             success =  (!isNaN(res));
             break;
         case "post":
-            login(user);
+            await login(user);
             break;
         case "delete":
             break;

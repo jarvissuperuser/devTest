@@ -9,6 +9,8 @@ router.get('/', function(req, res, next) {
   console.log(typeof req.body);
   auth(req.body,'put');
   res.send('ok');
+}).post('/auth',function (req,res,next) {
+  auth(req.body,'POST');
 });
 
 module.exports = router;

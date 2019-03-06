@@ -19,6 +19,11 @@ async function term_run(cmd,args) {
     console.log("db.done");
     fs.writeFileSync("db.ready","yes");
   }
+  else
+  {
+    console.log("db,done");
+    //child.kill(0)
+  }
 }
 
 // view engine setup

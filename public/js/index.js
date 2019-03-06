@@ -189,7 +189,7 @@ function post(data) {
         case "#login":
             $.post(root.destination +"/users/auth",data,function (res) {
                 console.log(res);
-            });
+            },'JSON');
             break;
         case "#register":
             $.ajax({

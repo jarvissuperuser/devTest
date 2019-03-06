@@ -6,7 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var dbcon = require("./sql_con_man");
+let fs = require("fs-extra");
 var app = express();
 
 // view engine setup
@@ -37,5 +38,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+let db = new dbcon("app.db");
+let data = fs.readFileSync("startup");
+db.multiquery(data.toString()).then((read)=>{console.log("done db")}).catch((e)=>{console.error(e)});
+//db init
 
 module.exports = app;

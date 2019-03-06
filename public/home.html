@@ -3,8 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>home page</title>
+    <meta name="viewport" scale="1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/fontawesome/css/all.min.css">
+    <script src="js/jquery.js"></script>
 </head>
 <body>
+<div class="row">
+    <div class="h-25 col">
+        <p>&af;</p>
+    </div>
+</div>
+    <div class="">
+        <div class=" nav nav-tabs nav-justified ">
+            <div class="nav-item "><div class="nav-link active text-success bg-light">Chat</div></div>
+            <div class="nav-item "><a class="nav-link text-danger" href="#/search/">Users</a></div>
+            <div class="nav-item "><a class="nav-link text-warning" href="#/users/">Me</a></div>
+        </div>
+    </div>
 
+<div class="row">
+    <div class="h-50 col ">
+        <p>&af;</p>
+    </div>
+</div>
+
+<div class="w3-container">
+    <div class="container-fluid">
+        <div class="w3-container w3-display-middle w3-col l5 s12">
+            <form class="w3-card " id="login">
+                <h2 class="w3-content w3-black w3-center">&UpEquilibrium;  Login  </h2>
+                <input class="w3-input" type="email" name="uEmail" placeholder="Email" required/>
+                <input class="w3-input" type="password" name="uPassword" placeholder="Password" required/>
+                <input class="w3-input w3-teal" type="submit" name="submit" value="continue" />
+                <button class="w3-input w3-blue w3-col l4" type="reset">clear</button>
+                <a class="w3-btn w3-red w3-col l4" href="#recover">Reset Password</a>
+                <a class="w3-btn w3-green w3-col l4" href="#register" >Register Account</a>
+            </form>
+            <form class="w3-card " id="register">
+                <h2 class="w3-container w3-black w3-center">&Equilibrium; Register  </h2>
+                <input class="w3-input w3-col l6" type="text" name="uName" placeholder="Name">
+                <!--<input class="w3-input w3-col l6" type="text" name="middle_name" placeholder="MiddleName">-->
+                <input class="w3-input"type="text" name="uSurname" placeholder="Surname">
+                <input class="w3-input" type="email" name="uEmail" placeholder="Email"/>
+                <input class="w3-input" type="password" name="uPassword" placeholder="Password"/>
+                <button class="w3-input w3-teal" type="submit" name="submit" value="submit" >Submit Details</button>
+                <button class="w3-input w3-blue w3-col l4" type="reset">clear</button>
+                <a class="w3-btn w3-red w3-col l4" href="#recover">Reset Password</a>
+                <a class="w3-btn w3-green w3-col l4" href="#login">Already a User</a>
+            </form>
+            <form class="w3-card " id="recover">
+                <h2 class="w3-container w3-black w3-center">&RightTeeVector;  Reset Password  </h2>
+                <input class="w3-input" type="email" name="email" placeholder="Email"/>
+                <input class="w3-input w3-teal" type="submit" name="submit" value="submit" />
+                <button class="w3-input w3-blue w3-col l4" type="reset">clear</button>
+                <a class="w3-btn w3-red w3-col l4" href="#login">Login</a>
+                <a class="w3-btn w3-green w3-col l4" href="#register">Register</a>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="container-fluid">
+    </div>
+</div>
+<script src="js/index.js"></script>
 </body>
 </html>

@@ -1,0 +1,19 @@
+create table if not exists  users(
+idx int primary key ,
+uName varchar(30)  default "name ",
+uSurname varchar(30) default "surname",
+uEmail varchar(70) not null unique default "thembiNaidoo@example.com",
+uPassword varchar (68)
+);
+create table if not exists chats(
+id int primary key,
+message1 text,
+message_type varchar(20),
+sender integer,
+receiver integer
+);
+create table if not exists sessions(
+id int primary key,
+session_id varchar(20),
+uID integer
+)

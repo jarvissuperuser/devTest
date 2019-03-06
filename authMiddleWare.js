@@ -4,9 +4,9 @@ let dbMan = require('./QueryBuilder');
 let db = new dbMan();
 
 let psHash = (arr= []) =>{
-    let hash = crypto.createHash("sha256");
-    hash.update(arr[3]);
-    arr[3] = hash.digest('hex');
+    let hash = crypto.createHmac("sha256","salt");
+    hash.update(arr['uPassword']);
+    arr['uPassword'] = hash.digest('hex');
     return arr;
 };
 let login = ()=>{};
@@ -15,8 +15,9 @@ let auth = async (user,operation)=>{
     let success = false;
     switch (operation.toLowerCase()) {
         case "put":
-            user.vals = psHash(user.vals);
-            db.insert("users",userCol,user.vals);
+            user = psHash(user);
+            user = db.mute(user,[],['submit']);
+            console.log(await db.transaction(db.insert("users",db.ex_key(user,[]),db.ex_val(user,[]))));
             break;
         case "post":
 

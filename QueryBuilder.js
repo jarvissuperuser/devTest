@@ -113,22 +113,8 @@ class QueryBuilder {
         }
         return new_;
     }
-    async transaction(qry){
-        let results = [];
-        return new Promise((w,f)=>{
-            self.dbi.run(qry,(err,rows)=>{
-                if (err){f(err)}
-                if (qry.indexOf('SELECT') > -1) {
-                    rows.forEach((row) => {
-                        results.push(row);
-                    });
-                    w(results)
-                }
-                else{
-                    w(rows)
-                }
-            });
-        });
+    transaction(qry){
+        return dbc.transaction(qry);
     }
     silence(old,silenced=[],new_=[]){
         let search = function(val){

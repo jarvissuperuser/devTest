@@ -1,0 +1,11 @@
+CREATE VIRTUAL TABLE if not exists userIdx USING fts5(uName, uSurname,uEmail, content='users', content_rowid='idx');
+CREATE TRIGGER tbl_uInsert AFTER INSERT ON users BEGIN
+  INSERT INTO userIdx(rowid,uName, uSurname, uEmail) VALUES (new.idx,new.uName, new.uSurname, new.uEmail);
+END;
+CREATE TRIGGER tbl_uDelete AFTER DELETE ON users BEGIN
+  INSERT INTO userIdx(userIdx, rowid, uName, uSurname,uEmail) VALUES('delete', old.idx, old.uName ,old.uSurname, old.uEmail);
+END;
+CREATE TRIGGER tbl_uUpdate AFTER UPDATE ON users BEGIN
+  INSERT INTO userIdx(userIdx, rowid, uName, uSurname,uEmail) VALUES('delete', old.idx, old.uName ,old.uSurname, old.uEmail);
+  INSERT INTO userIdx(rowid,uName, uSurname, uEmail) VALUES (new.idx,new.uName, new.uSurname, new.uEmail);
+END;

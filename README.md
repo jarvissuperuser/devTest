@@ -1,6 +1,6 @@
 # Chat App
-
-SPA which routes to app
+## Description
+SPA Chat app prototype
 
 ##How to setup
 ### Dependencies
@@ -24,6 +24,15 @@ this app requires node version 8 LTS to run
 the apps routes >> [localhost:3000/home.html](http://localhost:3000/home.html)
 
 ## Change log
+v 0.0.2
+
+#### whats working
+* Adding Users to db working
+
+### whats not working
+* redirection from registration view
+* login in
+
 v 0.0.1
 
 #### whats working

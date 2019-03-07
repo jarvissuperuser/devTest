@@ -1,3 +1,5 @@
+var $ = $?$:{};
+
 var root = {
     forms:document.querySelectorAll("form"),
     mockTableData:{
@@ -63,7 +65,7 @@ $(document).ready(function(){
         function(e){
             formsSPA();
             $('title').text(location.hash.substring(1));
-            formReady();
+            //formReady();
         }
     );
     formReady();
@@ -72,35 +74,36 @@ $(document).ready(function(){
 let formReady = function () {
     var forms = root.forms;
     forms.forEach(function (form,idx) {
-        $(form).submit(function (e) {
+        console.log(form.id);
+        $('#'+form.id).on('submit',function (e) {
             e.preventDefault();
-            var data = $(form).serializeArray();
+            var data = $('#'+form.id).serializeArray();
             var well_dressed = {};
             data.forEach(function(element){
                 well_dressed[element.name] = element.value;
             });
             //console.log({form:data,index:idx});
-            switch (idx){
-                case 0:
+            switch (location.hash){
+                case "#login":
                     well_dressed["submit"] = 'login';
                     post(well_dressed);
                     break;
-                case 1:
+                case "#register":
                     well_dressed["submit"] = 'add_user';
                     post(well_dressed);
                     break;
-                case 2:
+                case "#recover":
                     well_dressed["submit"] = 'reset_password';
                     post(well_dressed);
                     break;
                 default:
-                    alert("Big error")
+                    alert("Big error");
             }
 
             // console.log({form:data,index:idx});
             //sendToServer("http://localhost/datasv.php",data);
 
-        }) ;
+        } );
     });
 
 };
@@ -127,7 +130,7 @@ function navMan(hash) {
 function tableCreate(data,depth){
     //$("#data").empty();
     if (data){
-        var table = document.createElement("table");;
+        var table = document.createElement("table");
         var header = table.createTHead();
         table.style = "text-align:center";
         var rowCount = 0;
@@ -183,12 +186,12 @@ function hideCell(num){
 
 function post(data) {
     switch (location.hash) {
-        case "login":
+        case "#login":
             $.post(root.destination +"/users/auth",data,function (res) {
                 console.log(res);
-            });
+            },'JSON');
             break;
-        case "register":
+        case "#register":
             $.ajax({
                 type: 'PUT',
                 url: root.destination + "/users/auth",
@@ -202,7 +205,7 @@ function post(data) {
                 console.log('ALWAYS');
             });
             break;
-        case "password":
+        case "#password":
             $.ajax({
                 type: 'UPDATE',
                 url: root.destination + "/users/auth",
